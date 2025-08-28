@@ -1,15 +1,17 @@
 package com.example.jpa1to1.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import org.springframework.boot.autoconfigure.web.WebProperties;
 @Entity
 public class User {
 
-    @OneToOne(mappedBy = "user")
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
+    @JsonBackReference
     Employee employee;
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int userID;
 
     @Column(unique = true)
